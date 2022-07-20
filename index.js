@@ -22,6 +22,7 @@ const eventsRegister = () => {
         delete require.cache[require.resolve(`./events/${event}`)];
     });
 };
+
 const modelsRegister = () => {
     let eventsDir = Path.resolve(__dirname, './models');
     if (!fs.existsSync(eventsDir)) return console.log("No models dir");

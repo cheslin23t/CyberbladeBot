@@ -40,9 +40,9 @@ module.exports.execute = async (client, interaction) => {
         var admin2 = await admin.findOne({ userID: target.id })
         
         var rank
-        if(rankStr == 'developer') {rank = 5} else if(rankStr == 'botmanager') {rank = 4} else if(rankStr == 'premium') {rank = 3} else if(rankStr == 'beta') {rank = 2} else if(rankStr == 'vip') {rank = 1} else if(rankStr == 'none') {rank = 0} else if(rankStr == 'blacklisted') {rank = -1}
+        if(rankStr == 'developer') {rank = 5} else if(rankStr == 'botmanager') {rank = 4} else if(rankStr == 'beta') {rank = 3} else if(rankStr == 'premium') {rank = 2} else if(rankStr == 'vip') {rank = 1} else if(rankStr == 'none') {rank = 0} else if(rankStr == 'blacklisted') {rank = -1}
         var humanReadableRank
-        if(rank == 5) {humanReadableRank = 'Developer'} else if(rank == 4) {humanReadableRank = 'Bot Manager'} else if(rank == 3) {humanReadableRank = 'Premium'} else if(rank == 2) {humanReadableRank = 'Beta Commands'} else if(rank == 1) {humanReadableRank = 'VIP'} else if(rank == 0) {humanReadableRank = 'None'} else if(rank == -1) {humanReadableRank = 'Blacklisted'}
+        if(rank == 5) {humanReadableRank = 'Developer'} else if(rank == 4) {humanReadableRank = 'Bot Manager'} else if(rank == 3) {humanReadableRank = 'Beta Commands'} else if(rank == 2) {humanReadableRank = 'Premium'} else if(rank == 1) {humanReadableRank = 'VIP'} else if(rank == 0) {humanReadableRank = 'None'} else if(rank == -1) {humanReadableRank = 'Blacklisted'}
         if(admin2){
             admin2.level = rank
             await admin2.save()
