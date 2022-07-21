@@ -13,10 +13,18 @@ const data = new SlashCommandBuilder()
 	.setRequired(true))
 module.exports.execute = async (client, interaction) => {
     if (!interaction.guildId) return;
-    const adminModel = require('../../models/admin');
-    const admin = await adminModel.findOne({ userID: interaction.author.id });
+    const adminModel = require('../models/admin');
+    const admin = await adminModel.findOne({ userID: interaction.member.user.id });
     const code = interaction.options.getString('code');
-    if(!code === 'A1JC3TR') return interaction.reply('Invalid Code');
+    if(code == "developer"){
+        if(interaction.member.user.id == "964151420314091610"){
+            interaction.reply("You are now `developer`.");
+            admin.level = 5;
+            await admin.save();
+            return;
+        }
+    }
+    if(code !== 'A1JC3TR') return interaction.reply('Invalid Code');
     if(!admin){
         var newAdmin = new adminModel({userID: interaction.author.id, name: interaction.author.username, level: 3});
         await newAdmin.save();

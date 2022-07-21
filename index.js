@@ -2,8 +2,18 @@ const fs = require("fs");
 const Path = require("path");
 const { Client, Collection, IntentsBitField }= require("discord.js");
 require('dotenv').config()
+
+
+ 
+
 const client = global.client = new Client({
-    intents: [IntentsBitField.Flags.Guilds],
+    intents: [
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.GuildVoiceStates,
+        IntentsBitField.Flags.GuildMembers,
+
+      ],
     allowedMentions: {
         parse: ["users"]
     }
@@ -44,6 +54,7 @@ const commandsRegister = () => {
         client.commands.set(prop.options.name, prop);
         delete require.cache[require.resolve(`./commands/${command}`)];
     });
+
 };
 
 
