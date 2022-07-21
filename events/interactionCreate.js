@@ -16,12 +16,7 @@ module.exports = async (client, interaction) => {
                 return cmd.execute(client, interaction);
            
         }
-        if (!cmd.level) {
-            if(admin.level == -1){
-                return interaction.reply({ephemeral: true, content: "You are blacklisted from this bot."});
-            }
-            return cmd.execute(client, interaction);
-        }
+        
         
         
         if(admin && admin.level == -1){
