@@ -16,7 +16,11 @@ module.exports = async (client, interaction) => {
                 return cmd.execute(client, interaction);
            
         }
-        
+        if (admin && !cmd.level && admin.level !== -1) {
+            
+            return cmd.execute(client, interaction);
+       
+    }
         
         
         if(admin && admin.level == -1){
@@ -26,11 +30,7 @@ module.exports = async (client, interaction) => {
             }
             return interaction.reply({ephemeral: true, content: "You are blacklisted from this bot."});
         }
-        if (!admin) {
-                interaction.reply("You do not have permission to use this command.");
-            
-        
-        } else if(admin.level >= cmd.level) {
+        else if(admin.level >= cmd.level) {
             cmd.execute(client, interaction);
         } else {
             interaction.reply("You do not have permission to use this command.");
