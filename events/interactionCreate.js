@@ -6,7 +6,7 @@ module.exports = async (client, interaction) => {
         const adminModel = require("../models/admin");
         const admin = await adminModel.findOne({userID: interaction.user.id});
         const cmd = client.commands.get(interaction.commandName || null);
-      if (!admin && cmd.level) {
+      if (!admin && cmd.level && cmd.level !== -1) {
             
                 return interaction.reply({ephemeral: true, content: "You do not have permission to use this command."});
            

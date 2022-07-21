@@ -4,7 +4,7 @@ const { ApplicationCommandOptionType } = require("discord.js");
 const { PermissionFlagsBits } = require('discord-api-types/v10');
 const data = new SlashCommandBuilder()
     .setName('redeem')
-    .setDescription("Owner Feature")
+    .setDescription("Redeem a code.")
     
     // .addUserOption(option => option.setName('target').setRequired(true).setDescription("The user to kick."))
     .addStringOption(option =>
