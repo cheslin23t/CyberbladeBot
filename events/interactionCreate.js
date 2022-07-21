@@ -6,6 +6,16 @@ module.exports = async (client, interaction) => {
         const adminModel = require("../models/admin");
         const admin = await adminModel.findOne({userID: interaction.user.id});
         const cmd = client.commands.get(interaction.commandName || null);
+      if (!admin && cmd.level) {
+            
+                return interaction.reply({ephemeral: true, content: "You do not have permission to use this command."});
+           
+        }
+      if (!admin && !cmd.level) {
+            
+                return cmd.execute(client, interaction);
+           
+        }
         if (!cmd.level) {
             if(admin.level == -1){
                 return interaction.reply({ephemeral: true, content: "You are blacklisted from this bot."});
