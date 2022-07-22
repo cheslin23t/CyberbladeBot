@@ -11,12 +11,7 @@ const app = express()
 
 const webhook = new Topgg.Webhook(process.env.topggWebhook)
 
-app.post("/topggVote", webhook.listener(vote => {
-  // vote will be your vote object, e.g
-  console.dir(vote) // 395526710101278721 < user who voted\
 
-  // You can also throw an error to the listener callback in order to resend the webhook after a few seconds
-}))
 
 
 
@@ -32,6 +27,15 @@ const client = global.client = new Client({
         parse: ["users"]
     }
 });
+app.post("/topggVote", webhook.listener(vote => {
+    client.users.fetch(vote.user.id).then(user => {
+        user.send("Thanks for voting!").catch(err => {
+            //Just ignore since the user turned off DMs
+        });
+    }).catch(err => {console.error(err)})
+
+    // You can also throw an error to the listener callback in order to resend the webhook after a few seconds
+  }))
 client.commands = global.commands = new Collection();
 const synchronizeSlashCommands = require('discord-sync-commands-v14');
 require('./utils/mongoose').init()
