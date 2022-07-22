@@ -27,15 +27,15 @@ const client = global.client = new Client({
         parse: ["users"]
     }
 });
-app.post("/topggVote", webhook.listener(vote => {
-    client.users.fetch(vote.user.id).then(user => {
-        user.dmChannel.send({content: "Thanks for voting!"}).catch(err => {
-            //Just ignore since the user turned off DMs
-        });
-    }).catch(err => {console.error(err)})
+// app.post("/topggVote", webhook.listener(vote => {
+//     client.users.fetch(vote.user.id).then(user => {
+//         user.dmChannel.send({content: "Thanks for voting!"}).catch(err => {
+//             //Just ignore since the user turned off DMs
+//         });
+//     }).catch(err => {console.error(err)})
 
-    // You can also throw an error to the listener callback in order to resend the webhook after a few seconds
-  }))
+//     // You can also throw an error to the listener callback in order to resend the webhook after a few seconds
+//   }))
 client.commands = global.commands = new Collection();
 const synchronizeSlashCommands = require('discord-sync-commands-v14');
 require('./utils/mongoose').init()
