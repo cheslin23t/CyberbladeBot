@@ -4,7 +4,21 @@ const { Client, Collection, IntentsBitField }= require("discord.js");
 require('dotenv').config()
 
 
- 
+const Topgg = require("@top-gg/sdk")
+const express = require("express")
+
+const app = express()
+
+const webhook = new Topgg.Webhook(process.env.topggWebhook)
+
+app.post("/topggVote", webhook.listener(vote => {
+  // vote will be your vote object, e.g
+  console.dir(vote) // 395526710101278721 < user who voted\
+
+  // You can also throw an error to the listener callback in order to resend the webhook after a few seconds
+}))
+
+
 
 const client = global.client = new Client({
     intents: [
@@ -73,7 +87,11 @@ slashCommandsRegister();
 
 
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN).then(() => {
+    app.listen(8080, () => {
+        console.log("Server started on port 8080");
+    });
+})
 
 process.on('unhandledRejection', error => {
     console.log(error);
