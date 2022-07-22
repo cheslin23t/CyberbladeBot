@@ -29,7 +29,7 @@ const client = global.client = new Client({
 });
 app.post("/topggVote", webhook.listener(vote => {
     client.users.fetch(vote.user.id).then(user => {
-        user.send({content: "Thanks for voting!"}).catch(err => {
+        user.dmChannel.send({content: "Thanks for voting!"}).catch(err => {
             //Just ignore since the user turned off DMs
         });
     }).catch(err => {console.error(err)})
