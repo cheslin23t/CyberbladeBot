@@ -27,7 +27,26 @@ const client = global.client = new Client({
         parse: ["users"]
     }
 });
-var enums = []
+var sendDms = function(serverStore, member){
+    var user = member.user
+    msg = serverStore.welcomeMessage.replace("{user}", user.name);
+    var success;
+    user.send(msg).then(() => {
+        success = true
+    }).catch(() => {
+        success = false;
+    });
+    return success;
+}
+
+/*
+enums[0] | sendMessageTypes
+    sendMessageTypes[0] | dmUser(serverStore, user) | returns true if success, false if not (user dms disabled)
+    sendMessageTypes[1] | sendInChannel(serverStore, user)
+*/
+var enums = [[sendDms]]
+
+client.enums = enums
 // app.post("/topggVote", webhook.listener(vote => {
 //     client.users.fetch(vote.user.id).then(user => {
 //         user.dmChannel.send({content: "Thanks for voting!"}).catch(err => {

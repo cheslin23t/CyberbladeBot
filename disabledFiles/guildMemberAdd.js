@@ -8,9 +8,8 @@ module.exports = async (client, member) => {
             await newServer.save();
             return
         }
-        if(server.welcomeMessage) {
-            var welcomeMessage = server.welcomeMessage.replace("{user}", member.user.username);
-            member.guild.channels.cache.get(server.welcomeMessageChannel).send(welcomeMessage);
+        if(server.welcomeMessageEnabled) {
+            client.enums[server.type](server, member)
         }
 }
 
