@@ -27,6 +27,7 @@ const client = global.client = new Client({
         parse: ["users"]
     }
 });
+var enums = []
 // app.post("/topggVote", webhook.listener(vote => {
 //     client.users.fetch(vote.user.id).then(user => {
 //         user.dmChannel.send({content: "Thanks for voting!"}).catch(err => {
